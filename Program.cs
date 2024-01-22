@@ -13,33 +13,46 @@ namespace snake_ladder
             int player_pos = 0;
             int count = 0;
             Random rand = new Random();
-            while (player_pos != 100)
+            while (player_pos < 100)
             {
-                int dice_num = rand.Next(1, 6);
 
-                int option = rand.Next(0, 2);
+                int dice_num = rand.Next(1, 6);
+                count++;
+                int option = rand.Next(1, 3);
                 switch (option)
                 {
-                    case 0: continue;
+                    case 1: //no play
+                        Console.WriteLine("Position is " + player_pos);
+                        break;
 
-                    case 1:
-                        while (dice_num > 0)
+                    case 2:
+
+                        int newPos = player_pos + dice_num;
+                        Console.WriteLine("Position is " + player_pos);
+                        if (newPos > 100)
                         {
-                            player_pos++;
+                            continue;
+                        }
+                        else
+                        {
+                            player_pos = newPos;
                         }
                         break;
-                    case 2:
-                        while (dice_num > 0)
+                    case 3:
+                        Console.WriteLine("Position is " + player_pos);
+                        if (player_pos < 0)
                         {
-                            player_pos--;
+                            player_pos = 0;
+                            break;
                         }
+                        player_pos -= dice_num;
                         break;
                 }
-                if (player_pos < 0)
-                    player_pos = 0;
-                if (player_pos > 100)
-                    continue;
+
             }
+            Console.WriteLine("Dice was rolled " + count + " times");
+            Console.WriteLine("Player Position : " + player_pos);
+            Console.ReadLine();
         }
     }
 }
