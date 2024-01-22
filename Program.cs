@@ -12,24 +12,29 @@ namespace snake_ladder
         {
             int player_pos = 0;
             Random rand = new Random();
-            int dice_num = rand.Next(1, 6);
-            int option = rand.Next(0, 2);
-            switch (option)
+            while (player_pos != 100)
             {
-                case 0: continue;
+                int dice_num = rand.Next(1, 6);
+                int option = rand.Next(0, 2);
+                switch (option)
+                {
+                    case 0: continue;
 
-                case 1:
-                    while (dice_num > 0)
-                    {
-                        player_pos++;
-                    }
-                    break;
-                case 2:
-                    while (dice_num > 0)
-                    {
-                        player_pos--;
-                    }
-                    break;
+                    case 1:
+                        while (dice_num > 0)
+                        {
+                            player_pos++;
+                        }
+                        break;
+                    case 2:
+                        while (dice_num > 0)
+                        {
+                            player_pos--;
+                        }
+                        break;
+                }
+                if (player_pos < 0)
+                    player_pos = 0;
             }
         }
     }
