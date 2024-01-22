@@ -11,6 +11,9 @@ namespace snake_ladder
         static void Main(string[] args)
         {
             int player_pos = 0;
+            Random rand = new Random();
+            int dice_num = rand.Next(1, 6);
+
         }
     }
 }
