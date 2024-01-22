@@ -11,10 +11,12 @@ namespace snake_ladder
         static void Main(string[] args)
         {
             int player_pos = 0;
+            int count = 0;
             Random rand = new Random();
             while (player_pos != 100)
             {
                 int dice_num = rand.Next(1, 6);
+
                 int option = rand.Next(0, 2);
                 switch (option)
                 {
@@ -35,6 +37,8 @@ namespace snake_ladder
                 }
                 if (player_pos < 0)
                     player_pos = 0;
+                if (player_pos > 100)
+                    continue;
             }
         }
     }
