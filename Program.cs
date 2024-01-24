@@ -10,48 +10,104 @@ namespace snake_ladder
     {
         static void Main(string[] args)
         {
-            int player_pos = 0;
-            int count = 0;
+            int player_pos1 = 0;
+            int player_pos2 = 0;
+            //int count = 0;
+            int i = 1;
             Random rand = new Random();
-            while (player_pos < 100)
+            while (player_pos1 <= 100 || player_pos2 <= 100)
             {
 
-                int dice_num = rand.Next(1, 6);
-                count++;
-                int option = rand.Next(1, 3);
+                int dice_num = rand.Next(1, 7);
+                //count++;
+                int option = rand.Next(1, 4);
                 switch (option)
                 {
                     case 1: //no play
-                        Console.WriteLine("Position is " + player_pos);
-                        break;
-
-                    case 2:
-
-                        int newPos = player_pos + dice_num;
-                        Console.WriteLine("Position is " + player_pos);
-                        if (newPos > 100)
+                        if (i == 1)
                         {
-                            continue;
+                            Console.WriteLine("No play:\nPosition of player1 is " + player_pos1);
+                            i = 2;
+                            break;
                         }
                         else
                         {
-                            player_pos = newPos;
+                            Console.WriteLine("No play:\nPosition of player2 is " + player_pos2);
+                            i = 1;
+                            break;
+                        }
+
+                    case 2:
+                        if (i == 1)
+                        {
+                            //int newPos1 = player_pos1 + dice_num;
+                            if (player_pos1 + dice_num <= 100)
+                            {
+                                player_pos1 += dice_num;
+                                Console.WriteLine("After ladder:\nPosition of player1 is " + player_pos1);
+                            }
+                            else
+                            {
+                                player_pos1 = player_pos1;
+                            }
+                            i = 1;
+                        }
+                        else
+                        {
+                            if (player_pos2 + dice_num <= 100)
+                            {
+                                player_pos2 += dice_num;
+                                Console.WriteLine("After ladder:\nPosition of player2 is " + player_pos2);
+                            }
+                            else
+                            {
+                                player_pos2 = player_pos2;
+                            }
+                            i = 2;
                         }
                         break;
                     case 3:
-                        Console.WriteLine("Position is " + player_pos);
-                        if (player_pos < 0)
+                        if (i == 1)
                         {
-                            player_pos = 0;
-                            break;
+                           
+                            Console.WriteLine("After snake:\nPosition is of player1 is " + player_pos1);
+                            i = 2;
+                            player_pos1 -= dice_num;
+                            if (player_pos1 - dice_num < 0)
+                            {
+                                player_pos1 = 0;
+                            }
                         }
-                        player_pos -= dice_num;
+                        else
+                        {
+                            
+                            Console.WriteLine("After snake:\nPosition is of player2 is " + player_pos2);
+                            i = 1;
+                            player_pos2 -= dice_num;
+                            if (player_pos2 - dice_num < 0)
+                            {
+                                player_pos2 = 0;
+                            }
+                        }
                         break;
+                }
+                if (player_pos1 == 100)
+                {
+                    Console.WriteLine("Player1 won");
+                    break;
+                }
+                if (player_pos2 == 100)
+                {
+                    Console.WriteLine("Player2 won");
+                    break;
                 }
 
             }
-            Console.WriteLine("Dice was rolled " + count + " times");
-            Console.WriteLine("Player Position : " + player_pos);
+
+
+            //Console.WriteLine("Player Position : " + player_pos);
+            //Console.WriteLine("Dice was rolled " + count + " times");
+
             Console.ReadLine();
         }
     }
